@@ -1,40 +1,44 @@
 import requests
 from config.constants import BASE_URL
+import json
 
-
-class BaseAPI:
+class APIRequest:
     def __init__(self):
         self.default_headers = {
             'Content-Type': 'application/json',
             'Accept': '*/*',
             'Connection': 'keep-alive',
         }
-        self.request_url = BASE_URL
+        self.url = BASE_URL
 
-    def request(self, url, method, data={}, headers={}):
+        
+
+    def request(self, path, method, data={}, headers={}):
         self.default_headers.update(headers)
-        self.request_url = self.request_url + url
+        self.url = self.url + path
 
         response = requests.request(
             method=method,
-            url=self.request_url,
-            data=data,
+            url=self.url,
+            data=json.dumps(data),
             headers=self.default_headers
         )
 
         return response
     
-    def post(self, url, data={}, headers={}):
-        self.request(
-            url=url,
+    @classmethod
+    def post(cls, path, data={}, headers={}):
+        cls.request(
+            url=path,
             method="POST",
             data=data,
             headers=headers
         )
 
-    def get(self, url, headers={}):
-        self.request(
-            url=url,
+    @classmethod
+    def get(cls, path, headers={}):
+        cls.request(
+            url=path,
             method="GET",
             headers=headers
         )
