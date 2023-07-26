@@ -5,15 +5,16 @@ class Authenticator(APIRequest):
     def __init__(self):
         super().__init__()
     
-    def login(self, login, password):
+    def login(self, login, password, headers={}):
         """Logs in the user with the provided credentials."""
 
         path = "users.log_in"
 
         credentials = {"login": login, "password": password}
+        self.login_data = self.post(path, credentials, headers)
+        self.api_session = self.login_data.headers.get("API-SESSION")
         
-        self.login_data = self.post(path, credentials)
-
+        return self.api_session
 
     def set_credentials(self, login, password):
         """
@@ -30,8 +31,6 @@ class Authenticator(APIRequest):
         """Sends activation code to users's phone number"""
 
         path = "sessions.get_activation_code"
-
-        self.api_session = self.login_data.headers.get("API-SESSION")
 
         self.auth_headers = {
             "API-SESSION": self.api_session
