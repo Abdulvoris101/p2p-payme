@@ -1,1 +1,1 @@
-# p2p-payme
+# p2p-payme package
