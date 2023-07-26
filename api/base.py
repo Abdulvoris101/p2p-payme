@@ -11,25 +11,31 @@ class APIRequest:
         }
         self.url = BASE_URL
 
-        
-
     def request(self, path, method, data={}, headers={}):
         self.default_headers.update(headers)
         self.url = self.url + path
-
+        
         response = requests.request(
             method=method,
             url=self.url,
             data=json.dumps(data),
-            headers=self.default_headers
+            headers=self.default_headers,
+            timeout=20
         )
 
         return response
     
     @classmethod
     def post(cls, path, data={}, headers={}):
-        cls.request(
-            url=path,
+        instance = cls()
+
+        data = {
+            "method": path,
+            "params": data
+        }
+
+        return instance.request(
+            path=path,
             method="POST",
             data=data,
             headers=headers
@@ -37,8 +43,10 @@ class APIRequest:
 
     @classmethod
     def get(cls, path, headers={}):
-        cls.request(
-            url=path,
+        instance = cls()
+
+        return instance.request(
+            path=path,
             method="GET",
             headers=headers
         )
