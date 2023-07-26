@@ -1,10 +1,3 @@
-from auth.client import Authenticator
+from client import PaymeClient
 
-
-auth = Authenticator()
-
-auth.set_credentials("YOUR_PHONE", "YOUR_PASSWORD")
-
-verification_code = input("Verif code: ")
-
-deviceId = auth.activate(verification_code)
+client = PaymeClient("YOUR_PHONE", "YOUR_PASSWORD", "YOUR_DEVICE_ID")
