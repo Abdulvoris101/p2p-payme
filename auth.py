@@ -1,6 +1,7 @@
 from auth import Authenticator
 import os
 from dotenv import load_dotenv
+import time
 
 load_dotenv()
 
@@ -13,7 +14,11 @@ auth.set_credentials(phone_number, password)
 
 verification_code = input("Verif code: ")
 
-data = auth.activate(verification_code)
+device = auth.activate(verification_code)
+
+time.sleep(3)
+data = auth.login_with_device(device)
+
 print(data)
 
 # This is for testing functionality of code.

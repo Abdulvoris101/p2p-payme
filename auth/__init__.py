@@ -1,1 +1,1 @@
-from .client import Authenticator
+from .api import Authenticator

@@ -1,18 +1,23 @@
-from auth.client import Authenticator
+from auth.api import Authenticator
 
 class PaymeClient(Authenticator):
-    def __init__(self, api_key, device_id):
+    def __init__(self, api_key, device):
         """
-            Set user credentials
+            Set user keys and devices
         """
-        self.device_id = device_id
+
         self.api_key = api_key
+        self.device = device
+
+        self.set_auth_headers()
+
 
     def set_auth_headers(self):
-        self.device_auth_headers = {
-            "Device": self.device_id,
+        self.auth_headers = {
+            "Device": self.device,
             "API-SESSION": self.api_key
         }
+
 
     def get_cards(self):
         """
@@ -21,12 +26,8 @@ class PaymeClient(Authenticator):
 
         path = "cards.get_all"
 
-        self.set_auth_headers()
-
-        cards = self.post(path, {}, self.device_auth_headers)
-
-        print(cards.text)
-
+        cards = self.post(path, {}, self.auth_headers)
+        
 
         
         
