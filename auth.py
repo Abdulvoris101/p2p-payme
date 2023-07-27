@@ -1,12 +1,19 @@
-from auth.client import Authenticator
+from auth import Authenticator
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 auth = Authenticator()
 
-auth.set_credentials("YOUR_PHONE", "YOUR_PASSWORD")
+phone_number = os.environ.get("PHONE_NUMBER")
+password = os.environ.get("PASSWORD")
+
+auth.set_credentials(phone_number, password)
 
 verification_code = input("Verif code: ")
 
-deviceId = auth.activate(verification_code)
-
+data = auth.activate(verification_code)
+print(data)
 
 # This is for testing functionality of code.

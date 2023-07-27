@@ -11,10 +11,10 @@ class Authenticator(APIRequest):
         path = "users.log_in"
 
         credentials = {"login": login, "password": password}
-        self.login_data = self.post(path, credentials, headers)
-        self.api_session = self.login_data.headers.get("API-SESSION")
         
-        return self.api_session
+        self.login_data = self.post(path, credentials, headers)
+        self.api_key = self.login_data.headers.get("API-SESSION")
+        
     
     def set_credentials(self, login, password):
         """
@@ -33,11 +33,10 @@ class Authenticator(APIRequest):
         path = "sessions.get_activation_code"
 
         self.auth_headers = {
-            "API-SESSION": self.api_session
+            "API-SESSION": self.api_key
         }
 
-        self.post(path, {}, self.auth_headers)
-    
+        data = self.post(path, {}, self.auth_headers)
 
     def activate(self, verification_code):
         """ 
@@ -53,10 +52,13 @@ class Authenticator(APIRequest):
 
         self.activation_data = self.post(path, data, self.auth_headers)
 
-        # Automaticaly register device and return deviceId
+        # Automaticaly register device and returns deviceId and api-key
 
-        return self.register_device()
-
+        return {
+            "device-id": self.register_device(),
+            "api-key": self.api_key
+        }
+    
 
     def register_device(self):
         """

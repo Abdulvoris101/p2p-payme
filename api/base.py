@@ -15,8 +15,6 @@ class APIRequest:
         self.default_headers.update(headers)
         self.url = self.url + path
         
-        print(self.default_headers)
-        
         response = requests.request(
             method=method,
             url=self.url,
@@ -29,7 +27,7 @@ class APIRequest:
     
     @classmethod
     def post(cls, path, data={}, headers={}):
-        instance = cls()
+        instance = APIRequest()
 
         data = {
             "method": path,
@@ -45,7 +43,7 @@ class APIRequest:
 
     @classmethod
     def get(cls, path, headers={}):
-        instance = cls()
+        instance = APIRequest()
 
         return instance.request(
             path=path,

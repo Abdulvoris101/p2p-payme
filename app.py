@@ -4,6 +4,6 @@ import dotenv
 
 dotenv.load_dotenv()
 
-client = PaymeClient(os.environ.get("PHONE_NUMBER"), os.environ.get("PASSWORD"), os.environ.get("DEVICEID"))
+client = PaymeClient(os.environ.get("API_SESSION"), os.environ.get("DEVICE"))
 
 client.get_cards()
