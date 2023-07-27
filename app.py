@@ -1,3 +1,9 @@
 from client import PaymeClient
+import os
+import dotenv
 
-client = PaymeClient("YOUR_PHONE", "YOUR_PASSWORD", "YOUR_DEVICE_ID")
+dotenv.load_dotenv()
+
+client = PaymeClient(os.environ.get("PHONE_NUMBER"), os.environ.get("PASSWORD"), os.environ.get("DEVICEID"))
+
+client.get_cards()

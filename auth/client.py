@@ -15,7 +15,7 @@ class Authenticator(APIRequest):
         self.api_session = self.login_data.headers.get("API-SESSION")
         
         return self.api_session
-
+    
     def set_credentials(self, login, password):
         """
         Sets the user's login credentials and calls the login method. And calls send verification method.

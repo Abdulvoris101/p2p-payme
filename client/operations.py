@@ -14,7 +14,7 @@ class PaymeClient(Authenticator):
             "Device": self.device_id
         }
 
-        self.api_session = self.login(self.phone_number, self.password, self.device_headers)
+        self.api_session = self.login(self.phone_number, self.password, self.device_auth_headers)
         self.device_auth_headers["API-SESSION"] = self.api_session
 
     def get_cards(self):

@@ -15,6 +15,8 @@ class APIRequest:
         self.default_headers.update(headers)
         self.url = self.url + path
         
+        print(self.default_headers)
+        
         response = requests.request(
             method=method,
             url=self.url,
