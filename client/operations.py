@@ -1,7 +1,13 @@
 from auth.api import Authenticator
-from .scheme import CardList
+from .scheme import CardList, ResponseScheme
+from .manager import CardListWrapper
 
 class PaymeClient(Authenticator):
+    """
+        PaymeClient it has many functions of payme like a get_cards, get_cheques and etc.
+        Before using any methods it will login everytime for getting new api_key.
+    """
+
     def __init__(self, phone_number, password, device):
         """
             Set user keys and devices
@@ -30,8 +36,9 @@ class PaymeClient(Authenticator):
         return wrapper
 
 
+    @property
     @auth_required
-    def get_cards(self):
+    def cards(self):
         """
             Get all cards
         """
@@ -40,11 +47,12 @@ class PaymeClient(Authenticator):
 
         response = self.post(path, {}, self.auth_headers).json()
 
-        # Use card serializer 
+        # Use response serializer and card serializer
 
-        cards = CardList(response.get("result"))
+        response = ResponseScheme.parse_obj(response)
+        card = CardList.parse_obj(response.result)
 
-        return cards
+        return CardListWrapper(card.cards)
 
 
 

@@ -1,7 +1,12 @@
 from datetime import date
 from pydantic_collections import BaseCollectionModel
-
+from typing import List
 from pydantic import BaseModel, Field
+
+
+class ResponseScheme(BaseModel):
+    jsonrpc: str
+    result: dict
 
 
 # Model to represent a currency.
@@ -35,5 +40,18 @@ class Card(BaseModel):
     date: int
 
 
-class CardList(BaseCollectionModel[Card]):
-    pass
+class CardList(BaseModel):
+    cards: List[Card]
+
+    def filter(self, **kwargs):
+        """
+            Filter cards based on a keyword in the name or number.
+        """
+
+        filtered_cards = self.cards
+        
+        for key, value in kwargs.items():
+            filtered_cards = [card for card in filtered_cards if getattr(card, key) == value]
+        
+        return filtered_cards
+

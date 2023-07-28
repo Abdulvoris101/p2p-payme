@@ -33,13 +33,15 @@ class APIRequest:
             "method": path,
             "params": data
         }
-
-        return instance.request(
-            path=path,
-            method="POST",
-            data=data,
-            headers=headers
-        )
+        try:
+            return instance.request(
+                path=path,
+                method="POST",
+                data=data,
+                headers=headers
+            )
+        except Exception as e:
+            print(e)
 
     @classmethod
     def get(cls, path, headers={}):

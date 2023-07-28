@@ -10,4 +10,5 @@ DEVICE = os.environ.get("DEVICE")
 
 client = PaymeClient(PHONE_NUMBER, PASSWORD, DEVICE)
 
-client.get_cards()
+# client.get_cards()
+print(client.cards.get(id="6243fd35fe5217f5079a3d97"))
