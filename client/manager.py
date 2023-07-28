@@ -1,4 +1,4 @@
-from .scheme import Card
+from .scheme import Card, Cheque
 from typing import List
 
 
@@ -6,6 +6,7 @@ class CardListWrapper:
     def __init__(self, cards: List[Card]):
         self._cards = cards
     
+
     def filter_cards(self, **kwargs):
         filtered_cards = self._cards
 
@@ -21,7 +22,6 @@ class CardListWrapper:
         filtered_cards = self.filter_cards(**kwargs)
 
         return CardListWrapper(filtered_cards)
-
 
     def get(self, **kwargs):
         """
@@ -50,3 +50,20 @@ class CardListWrapper:
         """
         return self._cards
 
+
+class ChequeManager:
+    def __init__(self, _cheques: List[Cheque]):
+        self._cheques = _cheques
+    
+
+    def find(self, **kwargs):
+        finded_transactions = self._cheques
+
+        for key, value in kwargs.items():
+            finded_transactions = [cheque for cheque in finded_transactions if getattr(cheque, key) == value]
+
+        return finded_transactions
+    
+
+    def filter(self, obj, from_=None, to=None):
+        print(obj)

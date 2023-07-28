@@ -43,15 +43,18 @@ class Card(BaseModel):
 class CardList(BaseModel):
     cards: List[Card]
 
-    def filter(self, **kwargs):
-        """
-            Filter cards based on a keyword in the name or number.
-        """
 
-        filtered_cards = self.cards
-        
-        for key, value in kwargs.items():
-            filtered_cards = [card for card in filtered_cards if getattr(card, key) == value]
-        
-        return filtered_cards
+class Cheque(BaseModel):
+    id: str = Field(..., alias="_id")
+    create_time: int
+    pay_time: int
+    cancel_time: int
+    type: int
+    description: str
+    card: dict
+    amount: int
+    currency: int
 
+
+class ChequeList(BaseModel):
+    cheques: List[Cheque]

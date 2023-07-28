@@ -1,5 +1,5 @@
 from auth.api import Authenticator
-from .scheme import CardList, ResponseScheme
+from .scheme import CardList, ResponseScheme, ChequeList
 from .manager import CardListWrapper
 
 class PaymeClient(Authenticator):
@@ -48,12 +48,34 @@ class PaymeClient(Authenticator):
         response = self.post(path, {}, self.auth_headers).json()
 
         # Use response serializer and card serializer
-
         response = ResponseScheme.parse_obj(response)
         card = CardList.parse_obj(response.result)
 
         return CardListWrapper(card.cards)
 
+    
+    @auth_required
+    def transactions(self, card_id):
+        """
+            Get incoming transactions
+        """
+
+        path = "cheque.get_all"
+
+        data = {
+            "card": [card_id],
+            "category": ["589dca36333ec20890b25966", "56e95c616b6e8a6b89845274"],  # gets only p2p transactions
+            "operation": 1,  # gets only incoming cheques
+        }
+
+        response = self.post(path, data, self.auth_headers).json()
+
+        # Use response serializer and cheque serializer
+
+        response = ResponseScheme.parse_obj(response)
+        cheque = ChequeList.parse_obj(response.result)
+
+        return cheque.cheques
 
 
         
