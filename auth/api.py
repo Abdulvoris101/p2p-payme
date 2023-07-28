@@ -70,8 +70,7 @@ class Authenticator(APIRequest):
         self.post(path, data, self.auth_headers)
         
         # Register device
-        device = self.register_device()
-        
+        device = self.register_device() # get device
         
         return device
     
@@ -103,22 +102,5 @@ class Authenticator(APIRequest):
         device = f"{device_id}; {device_key};"
 
         return device
-
-    def login_with_device(self, device):
-        header = {
-            "Device": device
-        }
-
-        # Sets self.api_key
-        
-        self.login(self.phone_number, self.password, headers=header)
-
-        return {
-            "api-key": self.api_key,
-            "device": device
-        }
-
-
-
 
 
