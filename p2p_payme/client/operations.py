@@ -12,12 +12,11 @@ class PaymeClient(Authenticator):
         Before using any methods, it will log in every time to obtain a new API key.
     """
 
-    def __init__(self, phone_number, password, device):
+    def __init__(self, phone_number: str, password: str, device: str):
         """
             Initialize PaymeClient with user keys and device information
         """
-
-        self.phone_number = phone_number
+        self.phone_number = str(phone_number)
         self.password = password
         self.device = device
 
