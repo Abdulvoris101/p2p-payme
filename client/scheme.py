@@ -4,10 +4,6 @@ from typing import List
 from pydantic import BaseModel, Field
 
 
-class ResponseScheme(BaseModel):
-    jsonrpc: str
-    result: dict
-
 
 # Model to represent a currency.
 class Currency(BaseModel):
@@ -39,10 +35,17 @@ class Card(BaseModel):
 
     date: int
 
+    @classmethod
+    def from_response(cls, response: dict) -> 'Card':
+        return cls.parse_obj(response.get('result'))
+
 
 class CardList(BaseModel):
     cards: List[Card]
 
+    @classmethod
+    def from_response(cls, response: dict) -> 'Cheque':
+        return cls.parse_obj(response.get('result'))
 
 class Cheque(BaseModel):
     id: str = Field(..., alias="_id")
@@ -55,6 +58,15 @@ class Cheque(BaseModel):
     amount: int
     currency: int
 
+    @classmethod
+    def from_response(cls, response: dict) -> 'Cheque':
+        return cls.parse_obj(response.get('result'))
+    
+
 
 class ChequeList(BaseModel):
     cheques: List[Cheque]
+
+    @classmethod
+    def from_response(cls, response: dict) -> 'Cheque':
+        return cls.parse_obj(response.get('result'))

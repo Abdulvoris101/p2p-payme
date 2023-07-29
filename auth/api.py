@@ -1,11 +1,15 @@
 from api.base import APIRequest
 from config import constants
+from requests.structures import CaseInsensitiveDict
+from .scheme import Device
+
 
 class Authenticator(APIRequest):
     def __init__(self):
         super().__init__()
     
-    def login(self, login, password, headers={}):
+
+    def login(self, login: str, password: str, headers={}):
         """Logs in the user with the provided credentials."""
 
         path = "users.log_in"
@@ -18,10 +22,19 @@ class Authenticator(APIRequest):
         response = self.post(path, credentials, headers)
 
         # Set api_key 
+
+        if not isinstance(response.headers, (dict, CaseInsensitiveDict)):
+            raise Exception("API headers is not a valid dictionary. Please check the request.")
+        
         self.api_key = response.headers.get("API-SESSION")
 
 
-    def set_credentials(self, login, password):
+        if not self.api_key:
+            raise Exception("Invalid credentials.")
+
+
+
+    def set_credentials(self, login: str, password: str):
         """
         Sets the user's login credentials and calls the login method. And calls send verification method.
 
@@ -54,7 +67,8 @@ class Authenticator(APIRequest):
 
 
 
-    def activate(self, verification_code):
+
+    def activate(self, verification_code: int):
         """ 
             Activate account via verification code.
         """
@@ -93,13 +107,10 @@ class Authenticator(APIRequest):
         # Request to register device
         response = self.post(path, data, self.auth_headers).json()
         
-        result = response.get("result")
-
-        device_id = result.get("_id")
-        device_key = result.get("key")
+        device = Device.from_response(response)
 
         # Combine device_id and device_key to get device
-        device = f"{device_id}; {device_key};"
+        device = f"{device.id}; {device.key};"
 
         return device
 
