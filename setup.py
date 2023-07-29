@@ -1,5 +1,9 @@
 from setuptools import setup, find_packages
 
+def get_long_description():
+    with open('README.md', mode='r', encoding='utf8') as f:
+        return f.read()
+
 setup(
     name='p2p-payme',
     version='0.1.0',
@@ -24,6 +28,9 @@ setup(
     author_email='erkinovabdulvoris101@gmail.com',
     description='P2P automation',
     url='https://github.com/Abdulvoris101/p2p-payme',
+    long_description_content_type='text/markdown',
+    long_description=get_long_description(),
+    keywords='python payme p2p automation',
     entry_points={
         'console_scripts': [
             'auth=p2p_payme.cli:main',
