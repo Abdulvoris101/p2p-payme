@@ -24,4 +24,9 @@ setup(
     author_email='erkinovabdulvoris101@gmail.com',
     description='P2P automation',
     url='https://github.com/Abdulvoris101/p2p-payme',
+    entry_points={
+        'console_scripts': [
+            'auth=p2p-payme.cli:main',
+        ],
+    },
 )
