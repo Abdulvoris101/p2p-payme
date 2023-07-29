@@ -1,5 +1,5 @@
-from api.base import APIRequest
-from config import constants
+from p2p_payme.api.base import APIRequest
+from p2p_payme.config import constants
 from requests.structures import CaseInsensitiveDict
 from .scheme import Device
 

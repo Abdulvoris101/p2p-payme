@@ -1,5 +1,5 @@
 import requests
-from config.constants import BASE_URL
+from p2p_payme.config.constants import BASE_URL
 import json
 from requests.exceptions import ConnectTimeout
 import time
