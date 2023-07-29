@@ -6,7 +6,7 @@ def get_long_description():
 
 setup(
     name='p2p-payme',
-    version='0.1.0',
+    version='0.1.2',
     packages=find_packages(),
     install_requires=[
         'annotated-types==0.5.0',
