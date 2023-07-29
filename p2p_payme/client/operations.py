@@ -16,6 +16,7 @@ class PaymeClient(Authenticator):
         """
             Initialize PaymeClient with user keys and device information
         """
+        
         self.phone_number = str(phone_number)
         self.password = password
         self.device = device
@@ -29,6 +30,7 @@ class PaymeClient(Authenticator):
         self.auth_headers = {
             "Device": self.device
         }
+
         super().login(self.phone_number, self.password, self.auth_headers)
         self.auth_headers["API-SESSION"] = self.api_key
     
@@ -69,7 +71,6 @@ class PaymeClient(Authenticator):
         path = "cheque.get_all"
         
         # Subtract one month from 'from_' and 'to' to comply with Payme requirements
-        from_ = from_ - relativedelta(months=1) 
         to = to - relativedelta(months=1)
 
         data = {
@@ -87,6 +88,8 @@ class PaymeClient(Authenticator):
         # Set from_ if it is not None
 
         if from_ is not None:
+            from_ = from_ - relativedelta(months=1) 
+
             data["from"] = {
                 "day": from_.day,
                 "month": from_.month,
