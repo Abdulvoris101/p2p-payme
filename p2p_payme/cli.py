@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 import argparse
-from p2p_payme.auth import Authenticator
+from p2p_payme.auth.api import Authenticator
+
 
 def main():
     authenticator = Authenticator()
@@ -12,12 +13,12 @@ def main():
 
     args = parser.parse_args()
 
-    if not args.username:
-        args.username = input("Phone Number: ")
+    if not args.phone_number:
+        args.phone_number = input("Phone Number: ")
     if not args.password:
         args.password = input("Password: ")
     
-    authenticator.set_credentials(args.username, args.password)
+    authenticator.set_credentials(args.phone_number, args.password)
     # Prompt the user for verification code interactively
     verification_code = input("Verification Code: ")
 

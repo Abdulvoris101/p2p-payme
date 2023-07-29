@@ -1,4 +1,4 @@
-from auth.api import Authenticator
+from p2p_payme.auth.api import Authenticator
 from .scheme import CardList, ChequeList
 from .manager import CardManager, ChequeManager
 from datetime import datetime
