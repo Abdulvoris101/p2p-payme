@@ -26,7 +26,7 @@ setup(
     url='https://github.com/Abdulvoris101/p2p-payme',
     entry_points={
         'console_scripts': [
-            'auth=p2p-payme.cli:main',
+            'auth=p2p_payme.cli:main',
         ],
     },
 )
