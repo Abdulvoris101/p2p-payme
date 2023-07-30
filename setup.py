@@ -6,7 +6,7 @@ def get_long_description():
 
 setup(
     name='p2p-payme',
-    version='0.1.3',
+    version='0.1.4',
     packages=find_packages(),
     install_requires=[
         'pydantic>=1.7.4,<2.0.0',
