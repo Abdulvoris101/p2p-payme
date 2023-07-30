@@ -9,17 +9,11 @@ setup(
     version='0.1.3',
     packages=find_packages(),
     install_requires=[
-        'annotated-types==0.5.0',
-        'certifi==2023.7.22',
-        'charset-normalizer==3.2.0',
-        'idna==3.4',
-        'pydantic==2.1.1',
+        'pydantic>=1.7.4,<2.0.0',
         'pydantic-collections==0.5.0',
-        'pydantic_core==2.4.0',
         'python-dateutil==2.8.2',
         'python-dotenv==1.0.0',
         'requests==2.31.0',
-        'six==1.16.0',
         'typing_extensions==4.7.1',
         'urllib3==2.0.4'
     ],
