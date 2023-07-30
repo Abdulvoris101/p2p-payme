@@ -113,6 +113,9 @@ card = client.cards.get(name="uzcard")
 card_id = "YOUR_CARD_ID"
 transactions = client.transactions(card_id)
 
+# Get transaction by commment|description
+transaction = client.transactions(card_id).filter(description="")
+
 # Print transaction details
 for transaction in transactions:
     print(f"Transaction ID: {transaction.id}")
