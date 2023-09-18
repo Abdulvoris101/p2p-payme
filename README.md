@@ -14,16 +14,16 @@ pip install p2p-payme
 ```
 
 ## Authentication
-Before using the p2p_payme package, developers need to authenticate to obtain the device_id, which is required for all subsequent interactions with the Payme API. The device_id uniquely identifies the device from which the API requests are being made.
+Before using the p2p_payme package, you need to authenticate to obtain the device_id, which is required for all subsequent interactions with the Payme API. The device_id uniquely identifies the device from which the API requests are being made.
 
 Just write this in the terminal:
 ```
 auth
 ```
 
-To authenticate, the user needs to run the auth command in the terminal. The user will be prompted to enter their Payme account credentials, including the phone number and password. The provided credentials will be used to log in to the Payme API. 
+To authenticate, you need to run the auth command in the terminal. You will be prompted to enter your Payme account credentials, including the phone number and password. The provided credentials will be used to log in to the Payme API. 
 
-Upon successful authentication, the device_id will be obtained, and the user will be ready to use the PaymeClient to perform various operations.
+Upon successful authentication, the device_id will be obtained, and you will be ready to use the PaymeClient to perform various operations.
 
 ## PaymeClient Operations
 
