@@ -1,6 +1,6 @@
 # p2p-payme package
 
-[![\Telegram\] abdulvoris](https://img.shields.io/badge/Telegram-blue.svg?logo=telegram)](https://t.me/aerkinov1)
+[![\Telegram\] abdulvoris](https://img.shields.io/badge/Telegram-blue.svg?logo=telegram)](https://t.me/abdulvoris_101)
 
 ## Introduction
 
