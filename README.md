@@ -1,5 +1,5 @@
 # p2p-payme package
-# Actually right now it is p2p-payme package to make calls to apis provided payme. It is nearly imposible to automate p2p transactions. 
+# Actually right now p2p-payme package to make calls to apis provided payme. It is nearly imposible to automate p2p transactions. 
 [![\Telegram\] abdulvoris](https://img.shields.io/badge/Telegram-blue.svg?logo=telegram)](https://t.me/abdulvoris_101)
 
 ## Introduction
